@@ -1,17 +1,34 @@
 import { Todo } from '../entities/todo.entity';
 import { CREATED, OK, NO_CONTENT, NOT_FOUND } from '../../common/responses/api-responses';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class TodoPageMeta { // seria mais abstraído caso tivesse mais elementos além do Todo
+  @ApiProperty()
   page: number;
+  @ApiProperty()
   take: number;
+  @ApiProperty()
   itemCount: number;
+  @ApiProperty()
   pageCount: number;
+  @ApiProperty()
   hasPreviousPage: boolean;
+  @ApiProperty()
   hasNextPage: boolean;
 }
 
 export class TodoPageResponse {
+  @ApiProperty({
+    type: Todo,
+    isArray: true,
+    description: 'Array of todo items'
+  })
   data: Todo[];
+
+  @ApiProperty({
+    type: TodoPageMeta,
+    description: 'Pagination metadata'
+  })
   meta: TodoPageMeta;
 }
 
